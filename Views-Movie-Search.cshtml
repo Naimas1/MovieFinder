@@ -1,0 +1,11 @@
+﻿@model MovieApiResult
+
+@foreach (var movie in Model.Results)
+{
+    <div>
+        <img src="https://image.tmdb.org/t/p/w500@movie.PosterPath" alt="@movie.Title" />
+        <h2>@movie.Title</h2>
+        <p>@movie.Overview</p>
+        <span>Rating: @movie.Rating</span>
+    </div>
+}

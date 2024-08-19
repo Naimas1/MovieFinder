@@ -1,0 +1,33 @@
+﻿@model MovieFinder.Models.Movie
+
+<!-- Информация о фильме -->
+
+<h3>Reviews</h3>
+@foreach (var review in Model.Reviews)
+{
+    <div>
+        <strong>@review.User.UserName</strong>
+        <p>@review.Content</p>
+        <span>Rating: @review.Rating</span>
+    </div>
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-action="Create" asp-controller="Review" method="post">
+        <input type="hidden" name="movieId" value="@Model.Id" />
+        <textarea name="content"></textarea>
+        <select name="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <button type="submit">Add Review</button>
+    </form>
+}
+else
+{
+    <p>Please <a href="/Identity/Account/Login">login</a> to add a review.</p>
+}
