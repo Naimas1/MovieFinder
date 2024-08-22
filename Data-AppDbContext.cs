@@ -1,5 +1,4 @@
-﻿
-public class AppDbContext : DbContext
+﻿public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -7,6 +6,11 @@ public class AppDbContext : DbContext
     public DbSet<Genre> Genres { get; set; }
 
     internal void SaveChanges()
+    {
+        throw new NotImplementedException();
+    }
+
+    internal async Task SaveChangesAsync()
     {
         throw new NotImplementedException();
     }

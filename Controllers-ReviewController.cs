@@ -1,38 +1,87 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
-public class ReviewController : Controller
+using MovieFinder;
+public class ReviewController : Controller, IEquatable<ReviewController?>
 {
-    private readonly AppDbContext _context;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly AppDbContext context;
 
-    public ReviewController(AppDbContext context, UserManager<IdentityUser> userManager)
+    public ReviewController(UserManager<ApplicationUser> userManager, AppDbContext context)
     {
-        _context = context;
-        _userManager = userManager;
+        this.context = context;
+        this.UserManager = userManager;
     }
+
+    public UserManager<ApplicationUser> UserManager { get; }
 
     public AppDbContext Get_context()
     {
-        return _context;
+        return context;
     }
 
-    [HttpPost]
-    [Authorize]
-    public async Task<IActionResult> Create(int movieId, string content, int rating, AppDbContext _context)
+    public AppDbContext GetContext1(AppDbContext context1)
     {
-        var review = new Review
-        {
-            MovieId = movieId,
-            Content = content,
-            Rating = rating,
-            UserId = _userManager.GetUserId(User),
-            CreatedAt = DateTime.Now
-        };
-        _context.Reviews.Add(review);
-        await _context.SaveChangesAsync();
+        return context1;
+    }
 
-        return RedirectToAction("Details", "Movie", new { id = movieId });
+    public Task<IActionResult> AddReview(Review newReview, AppDbContext context, AppDbContext context1, AppDbContext context2)
+    {
+        if (newReview is null)
+        {
+            throw new ArgumentNullException(nameof(newReview));
+        }
+
+        if (context is null)
+        {
+            throw new ArgumentNullException(nameof(context));
+        }
+
+        if (context1 is null)
+        {
+            throw new ArgumentNullException(nameof(context1));
+        }
+
+        if (context1 is null)
+        {
+            throw new ArgumentNullException(nameof(context1));
+        }
+
+        if (context1 is null)
+        {
+            throw new ArgumentNullException(nameof(context1));
+        }
+
+        if (context1 is null)
+        {
+            throw new ArgumentNullException(nameof(context1));
+        }
+
+        return AddReview(newReview, context, context1, context1, context2: context);
+    }
+
+    private async Task<IActionResult> AddReview(Review newReview, AppDbContext context, AppDbContext context11, AppDbContext context12, AppDbContext context2)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<IActionResult> AddReview(Review newReview, AppDbContext context, AppDbContext context1, AppDbContext context1, AppDbContext context2, AppDbContext context2)
+    {
+        if (context1 is null)
+        {
+            throw new ArgumentNullException(nameof(context1));
+        }
+
+        if (ModelState.IsValid)
+        {
+            AppDbContext context3 = this.context;
+            object value = context.Reviews.Add(newReview);
+            await this.context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        return View(newReview);
+    }
+
+    public bool Equals(ReviewController? other)
+    {
+        throw new NotImplementedException();
     }
 }

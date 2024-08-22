@@ -1,12 +1,20 @@
-﻿using FluentAssertions.Common;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 public class Startup
 {
+    public IConfiguration Configuration { get; }
+
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
+
     public void ConfigureServices(IServiceCollection services)
     {
+        // Настройка контекста базы данных с использованием строки подключения из конфигурации
         services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); // UseSqlServer теперь будет доступен
 
         services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
@@ -14,7 +22,6 @@ public class Startup
 
         services.AddControllersWithViews();
         services.AddHttpClient<MovieApiService>();
-
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -31,10 +38,8 @@ public class Startup
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-
         app.UseRouting();
-
-        app.UseAuthentication(); // Добавлено для включения аутентификации
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
