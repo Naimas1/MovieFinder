@@ -12,14 +12,6 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        // Настройка контекста базы данных с использованием строки подключения из конфигурации
-        services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); // UseSqlServer теперь будет доступен
-
-        services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
-
         services.AddControllersWithViews();
         services.AddHttpClient<MovieApiService>();
     }

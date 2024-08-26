@@ -21,13 +21,13 @@
 
         var movies = new Movie[]
         {
-            new Movie{Title="Inception",Rating=8.8,GenreId=1},
+            new Movie{Title ="Inception",Rating = 8.8,GenreId = 1},
             new Movie{Title="The Dark Knight",Rating=9.0,GenreId=1},
             new Movie{Title="Shrek",Rating=7.8,GenreId=4},
             new Movie{Title="The Lion King",Rating=8.5,GenreId=4},
             new Movie{Title="Parasite",Rating=8.6,GenreId=3},
             new Movie{Title="The Conjuring",Rating=7.5,GenreId=5},
-            new Movie{Title="The Hangover",Rating=7.7,GenreId=2}
+            new Movie{ Title = "The Hangover", Rating = 7.7, GenreId = 2 }
         };
 
         context.Movies.AddRange(movies);
